@@ -16,8 +16,8 @@ class App extends Component {
   nameSort = () => {
     this.setState({
       allHogs: this.state.allHogs.sort(function(a, b) {
-        let nameA = a.name // ignore upper and lowercase
-        let nameB = b.name // ignore upper and lowercase
+        let nameA = a.name
+        let nameB = b.name
         if (nameA < nameB) {
           return -1
         }
