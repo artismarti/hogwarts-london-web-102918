@@ -61,7 +61,7 @@ export default class HogTile extends Component {
         <p className="hoggyText">{this.state.weightRatio}</p>
         <p className="achievementText hoggyText">{this.state.highestMedal}</p>
         <div>
-          <button onClick={this.handleHide}>Hog Info</button>
+          <button onClick={this.handleHide}>Hide Hog</button>
         </div>
       </div>
     )
