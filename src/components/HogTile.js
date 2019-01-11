@@ -10,21 +10,34 @@ export default class HogTile extends Component {
       weightRatio: '',
       highestMedal: '',
       hideHog: '',
+      showHogData: false,
     }
   }
   getHogImage = name => {
     return `${name.toLowerCase().replace(/ /g, '_')}.jpg`
   }
   handleClick = e => {
-    this.setState({
-      hogSpecialty: this.props.hogData.specialty,
-      weight: this.props.hogData.weight,
-      greased: this.props.hogData.greased,
-      weightRatio: this.props.hogData[
-        'weight as a ratio of hog to LG - 24.7 Cu. Ft. French Door Refrigerator with Thru-the-Door Ice and Water'
-      ],
-      highestMedal: this.props.hogData['highest medal achieved'],
-    })
+    if (!this.state.showHogData) {
+      this.setState({
+        hogSpecialty: this.props.hogData.specialty,
+        weight: this.props.hogData.weight,
+        greased: this.props.hogData.greased,
+        weightRatio: this.props.hogData[
+          'weight as a ratio of hog to LG - 24.7 Cu. Ft. French Door Refrigerator with Thru-the-Door Ice and Water'
+        ],
+        highestMedal: this.props.hogData['highest medal achieved'],
+        showHogData: true,
+      })
+    } else {
+      this.setState({
+        hogSpecialty: '',
+        weight: '',
+        greased: '',
+        weightRatio: '',
+        highestMedal: '',
+        showHogData: false,
+      })
+    }
   }
   handleHide = () => {
     this.setState({
@@ -33,7 +46,11 @@ export default class HogTile extends Component {
   }
   render() {
     return (
-      <div className="pigTile" style={{ display: this.state.hideHog }}>
+      <div
+        className="pigTile"
+        style={{ display: this.state.hideHog }}
+        onClick={this.handleClick}
+      >
         <p className="smallHeader">{this.props.hogData.name}</p>
         <img
           src={`hog-imgs/${this.getHogImage(this.props.hogData.name)}`}
@@ -44,8 +61,7 @@ export default class HogTile extends Component {
         <p className="hoggyText">{this.state.weightRatio}</p>
         <p className="achievementText hoggyText">{this.state.highestMedal}</p>
         <div>
-          <button onClick={this.handleClick}>Hog Info</button>
-          <button onClick={this.handleHide}>Hide Hog</button>
+          <button onClick={this.handleHide}>Hog Info</button>
         </div>
       </div>
     )
